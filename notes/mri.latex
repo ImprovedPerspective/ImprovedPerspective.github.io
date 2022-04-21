@@ -1,0 +1,12 @@
+\documentclass{article}
+\loadcssfile{./style.css}
+
+\begin{document}
+
+\section{Basics}
+Here I am going to put some of the most basic important equations.
+$ \omega = \gamma B$
+
+
+\end{document}
+
