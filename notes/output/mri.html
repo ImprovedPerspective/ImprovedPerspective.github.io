@@ -74,10 +74,97 @@ text-indent: 0;
 <body >
 <!--HEVEA command line is: hevea -o notes/output/mri.html notes/mri.latex -->
 <!--CUT STYLE article--><!--CUT DEF section 1 -->
-<!--TOC section id="sec1" Basics-->
-<h2 id="sec1" class="section">1&#X2003;Basics</h2><!--SEC END --><p>
-Here I am going to put some of the most basic important equations.
- &#X3C9; = &#X3B3; <span style="font-style:italic">B</span></p><!--CUT END -->
+<!--TOC section id="sec1" Lab 1-->
+<h2 id="sec1" class="section">1&#X2003;Lab 1</h2><!--SEC END --><p>
+Console generates RF that generate the MR signal.
+Magnetic field gradient&#X2019;s control the spatial localization.
+Pulse Sequence is a program that controls the gradients and coils to activate them at certain times.</p><p>Pulse sequence is set of controls for generating pulses and the digitizer. 
+Free induction decay (FID) is the signal returned when no spatial localization occurs.
+	
+A RF pulse tip spins to generate a signal. The Slice Select, Readout (aka Frequency Encode) and the Phase Encode gradients are used to for spatial localization. Repetition Time is TR and Echo Time is TE.</p><p>MRI&#X2019;s require homogeneous fields. This means that the strength of the field is relatively even throughout the area being investigated. 
+Homogeneity is often measure in terms of parts per million or ppm. 
+If the Larmour Frequency were 10 MHz then 1 ppm would be 10 Hz.
+Shimming is the process of improving the homogeneity by using shim coils to change the magnetic field distribution.</p><p>The MRI takes data in as a set of Kspace data. A Fourier Transform of the k-space data can be taken to reconstruct the image.</p><p>PreLab 1
+TODO: Bandwidth of RF pulse
+TODO: Spectral Width 
+TODO: Full-width Half maximum
+TODO: FOV Matrix size to resolution
+TODO: Imaging planes (Axial Sagital ...)</p>
+<!--TOC section id="sec2" Lab 2-->
+<h2 id="sec2" class="section">2&#X2003;Lab 2</h2><!--SEC END --><p>
+The Slice Selection Pulse tips the spins in the region we are interested in investigating.
+The 180 or refocusing pulse is used in spin echos to flip the tips 180 degrees. 
+The signal is acquired as the frequency encoding gradient is producing spatial localization in that direction.</p>
+<!--TOC subsection id="sec3" Larmour Frequency Equation-->
+<h3 id="sec3" class="subsection">2.1&#X2003;Larmour Frequency Equation</h3><!--SEC END --><p> &#X3C9; = &#X3B3; * <span style="font-style:italic">B</span><sub>0</sub></p><p>&#X3B3; = 2*<span style="font-style:italic">pi</span>*42.57*10<sup>6</sup> [<span style="font-style:italic">rad</span>*<span style="font-style:italic">Hz</span>/<span style="font-style:italic">T</span>] </p><p> <span style="font-style:italic">T</span> = 10<sup>4</sup> <span style="font-style:italic">G</span></p><p>The Larmour Frequency is the resonant frequency of spins present in a magnetic field of a certain strength.</p>
+<!--TOC subsection id="sec4" Frequency Encode Gradient Equation-->
+<h3 id="sec4" class="subsection">2.2&#X2003;Frequency Encode Gradient Equation</h3><!--SEC END --><p>
+ <span style="font-style:italic">BW</span><sub><span style="font-style:italic">fe</span></sub> [<span style="font-style:italic">rad</span>/<span style="font-style:italic">sec</span>] = &#X3B3; * <span style="font-style:italic">G</span><sub><span style="font-style:italic">fe</span></sub>*<span style="font-style:italic">FOV</span><sub><span style="font-style:italic">fe</span></sub></p><p>Note: This is the frequency encode band width not pulse!</p><p> <span style="font-style:italic">Sampling</span> <span style="font-style:italic">Rate</span> = </p>
+<!--TOC subsection id="sec5" Slice Selection -->
+<h3 id="sec5" class="subsection">2.3&#X2003;Slice Selection </h3><!--SEC END --><p>
+ <span style="font-style:italic">Slice</span> <span style="font-style:italic">Thickness</span> = &#X394; <span style="font-style:italic">z</span></p><p> &#X394; <span style="font-style:italic">z</span> = <span style="font-style:italic">BW</span><sub><span style="font-style:italic">pulse</span></sub> [<span style="font-style:italic">rad</span>/<span style="font-style:italic">sec</span>]/&#X3B3; <span style="font-style:italic">G</span><sub><span style="font-style:italic">ss</span></sub></p><p> 1 [<span style="font-style:italic">G</span>/<span style="font-style:italic">cm</span>] = 425.7 [<span style="font-style:italic">Hz</span>/<span style="font-style:italic">mm</span>]</p><p>Because a narrower bandwidth means a longer RF pulse which would change timings, the slice thickness is typically changed by the gradient strength. To generate a relatively uniform tip over all bandwidths, we use a sinc pulse as its Fourier Transform is a rectangular pulse.</p>
+<!--TOC subsection id="sec6" Sinc Pulse Notes-->
+<h3 id="sec6" class="subsection">2.4&#X2003;Sinc Pulse Notes</h3><!--SEC END --><p>
+Period of a sinc pulse is the time from its peak to first null. 
+The bandwidth in Hz is the inverse of this time.</p>
+<!--TOC subsection id="sec7" Slice Rephase-->
+<h3 id="sec7" class="subsection">2.5&#X2003;Slice Rephase</h3><!--SEC END --><p>
+If the tips of the spins are knocked down at the middle of the sinc pulse then the spins at different distances precess at different frequencies. This results in a phase offset based on position. Therefore a spin at distance z for a sinc pulse of length Tp will have an offset of &#X3C6;(<span style="font-style:italic">z</span>) = &#X3B3; * <span style="font-style:italic">G</span><sub><span style="font-style:italic">ss</span></sub>*<span style="font-style:italic">z</span>*<span style="font-style:italic">T</span><sub><span style="font-style:italic">p</span></sub>/2 . 
+If the spins are knocked down at the center point of the sinc then they only dephase for half of the pulse length <span style="font-style:italic">T</span><sub><span style="font-style:italic">P</span></sub>/2. </p><p>To address this dephasing, we apply a gradient withe the opposite sign for <span style="font-style:italic">T</span><sub><span style="font-style:italic">P</span></sub>/2 which will result in a total net phase of 0.
+Notes: To account for gradients the general equation is &#X222B;<sup><span style="font-style:italic">t</span>=<span style="font-style:italic">T</span><sub><span style="font-style:italic">P</span></sub>/2+<span style="font-style:italic">ramp</span></sup><sub><span style="font-style:italic">t</span>=0</sub><span style="font-style:italic">G</span><sub><span style="font-style:italic">ss</span></sub>(<span style="font-style:italic">t</span>)<span style="font-style:italic">dt</span> = &#X2212; &#X222B;<sub><span style="font-style:italic">t</span>=<span style="font-style:italic">rewind</span>_<span style="font-style:italic">pulse</span></sub><span style="font-style:italic">G</span><sub><span style="font-style:italic">rw</span></sub>(<span style="font-style:italic">t</span>)<span style="font-style:italic">dt</span> </p>
+<!--TOC subsection id="sec8" Frequency Encoding-->
+<h3 id="sec8" class="subsection">2.6&#X2003;Frequency Encoding</h3><!--SEC END --><p>
+The gradient in this direction maps a frequency value to a position. When we get a signal back from the echo, we can determine its position based on its frequency. </p><p>The frequency encode gradient also causes the phase accumulation which means we must dephase cancel out this effect. We need the frequency dephase pulse to have the same area as the first half of the frequency encoding pulse so that the total net dephase is 0. 
+Important Note: The 180 degree pulse flips the sign of our phase. If the frequency encode dephase is after the 180 it will be the opposite sign of the frequency encoding pulse if its before it will be the same sign. 
+This goes for all dephasing pulses.</p>
+<!--TOC subsection id="sec9" Gradient Waveforms and Eddy Currents-->
+<h3 id="sec9" class="subsection">2.7&#X2003;Gradient Waveforms and Eddy Currents</h3><!--SEC END --><p>
+Producing the desired gradient pulse is not as simple as sending an exact digital copy of the signal we want to the gradient amplifiers. Instead, we have to deal with the realities that the gradients have rise times resulting from being inductors and other non ideal characteristics that we must address. 
+To get our desired output, we send a predistorted waveform. The predistortion is called pre-emphasis. It compensates for the transfer function of the entire system.</p><p>The ideal waveforms can be seen on the console. The predistorted waveforms can be seen going into the amplifier and out from the amplifier we can see the actual produced currents. The actual magnetic field gradients are not exactly any of these measurements due to eddy currents.</p>
+<!--TOC section id="sec10" Lab 3-->
+<h2 id="sec10" class="section">3&#X2003;Lab 3</h2><!--SEC END --><p>
+Discusses T1, T2, TR, and TE parameters.
+T1 and T2 are relaxation parameters that effect the contrast between different tissues. 
+The Image intensity equation <span style="font-style:italic">I</span>(<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>) = <span style="font-style:italic">M</span><sub><span style="font-style:italic">z</span></sub><sup>0</sup> (<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>)(1&#X2212;<span style="font-style:italic">e</span><sup>&#X2212;<span style="font-style:italic">TR</span>/<span style="font-style:italic">T</span><sub>1</sub>(<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>)</sup>)*<span style="font-style:italic">e</span><sup>&#X2212;<span style="font-style:italic">TE</span>/<span style="font-style:italic">T</span>2(<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>)</sup></p><p>A T1 weighting occurs when we reduce the impact of T2 relaxation. A super short TE and TR on the order of T1 would obtain an image whose contrast is mainly determined by the T1. For a T2 weighted image we would have a TE on the order of T2 with a long TR.</p><p>By collecting three images, two with the same TR but different TE and two with the same TE but different TR values. We can then use the intensity equation to find the values for T2 and T1 by the two data sets.</p><p>You can analytically solve for T2 from the ratio of the Intensity equation of two images to find <span style="font-style:italic">T</span><sub>2</sub> =<span style="font-style:italic">TE</span><sub>2</sub>&#X2212;<span style="font-style:italic">TE</span><sub>1</sub>/<span style="font-style:italic">ln</span>(<span style="font-style:italic">I</span><sub>1</sub>/<span style="font-style:italic">I</span><sub>2</sub>)
+T1 requires you to find a best fit curve.</p>
+<!--TOC subsection id="sec11" T1-->
+<h3 id="sec11" class="subsection">3.1&#X2003;T1</h3><!--SEC END --><p>
+T1 is the relaxation of the tip angle back to 0 degrees from whatever angle it was tipped to.</p>
+<!--TOC subsection id="sec12" T2-->
+<h3 id="sec12" class="subsection">3.2&#X2003;T2</h3><!--SEC END --><p>
+T2 is the loss of signal due to dephasing of spins in the transverse plane.</p>
+<!--TOC section id="sec13" Lab 4-->
+<h2 id="sec13" class="section">4&#X2003;Lab 4</h2><!--SEC END --><p>
+Signal to Noise Ratio = SNR</p><p>Issues with averaging just a block of air as noise:
+</p><ul class="itemize"><li class="li-itemize">
+	&#X2013; FOV is completely filled
+</li><li class="li-itemize">&#X2013; Phase encode jitter spreads the noise out
+</li><li class="li-itemize">&#X2013; Using an array coil
+</li></ul><p>We prefer to use standard deviation to measure the noise. 
+Ideal snr measurement would take repeated scans over the course of a year.</p>
+<!--TOC subsection id="sec14" SNR Metrics-->
+<h3 id="sec14" class="subsection">4.1&#X2003;SNR Metrics</h3><!--SEC END --><p> <span style="font-style:italic">SNR</span><sub><span style="font-style:italic">simple</span></sub> = <span style="font-style:italic">m</span>(<span style="font-style:italic">signal</span>)/<span style="font-style:italic">m</span>(<span style="font-style:italic">noise</span>)</p><p> <span style="font-style:italic">SNR</span><sub><span style="font-style:italic">mean</span></sub> = <span style="font-style:italic">m</span>(<span style="font-style:italic">signal</span>)/&#X221A;<span style="text-decoration:overline">2/&#X3C0;</span><span style="font-style:italic">m</span>(<span style="font-style:italic">noise</span>)=1.26*<span style="font-style:italic">SNR</span><sub><span style="font-style:italic">simple</span></sub></p><p> <span style="font-style:italic">SNR</span><sub><span style="font-style:italic">std</span></sub> = <span style="font-style:italic">m</span>(<span style="font-style:italic">signal</span>)/&#X221A;<span style="text-decoration:overline">2/4&#X2212;&#X3C0;</span><span style="font-style:italic">std</span>(<span style="font-style:italic">noise</span>)= 0.655<span style="font-style:italic">m</span>(<span style="font-style:italic">signal</span>)/<span style="font-style:italic">std</span>(<span style="font-style:italic">noise</span>)</p><p>For the SNR difference method, obtain two identical images then take the mean of the sum of the mean of the difference.</p><p> <span style="font-style:italic">SNR</span><sub><span style="font-style:italic">diff</span></sub> = 1/2<span style="font-style:italic">m</span>(<span style="font-style:italic">sum</span>)/1/&#X221A;<span style="text-decoration:overline">2</span><span style="font-style:italic">m</span>(<span style="font-style:italic">diff</span>)= <span style="font-style:italic">m</span>(<span style="font-style:italic">sum</span>)/&#X221A;<span style="text-decoration:overline">2</span><span style="font-style:italic">m</span>(<span style="font-style:italic">diff</span>)</p><p>For the SNR zero method, obtain two images but one with the tip angle set to 0 so any transmitter noise is still present.</p><p>Then you can use either <span style="font-style:italic">SNR</span><sub><span style="font-style:italic">mean</span></sub> or <span style="font-style:italic">SNR</span><sub><span style="font-style:italic">std</span></sub> with the noise coming from the second image.</p>
+<!--TOC subsection id="sec15" SNR Equation-->
+<h3 id="sec15" class="subsection">4.2&#X2003;SNR Equation</h3><!--SEC END --><p> <span style="font-style:italic">SNR</span> = <span style="font-style:italic">K</span>* (<span style="font-style:italic">Voxel</span>_<span style="font-style:italic">Size</span>) * &#X221A;<span style="text-decoration:overline"><span style="font-style:italic">Measurements</span></span>/&#X221A;<span style="text-decoration:overline"><span style="font-style:italic">Bandwidth</span></span> </p><p>For 2D,</p><div class="equationcontainer"><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">
+<span style="font-style:italic">SNR</span><sub>2<span style="font-style:italic">D</span></sub>&#X2004;=&#X2004;<span style="font-style:italic">K</span>*</td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center"><span style="font-style:italic">FOV</span><sub><span style="font-style:italic">x</span></sub></td></tr>
+<tr><td class="hrule"></td></tr>
+<tr><td class="dcell" style="text-align:center"><table class="display"><tr style="vertical-align:middle"><td class="dcell"><span style="font-size:x-large">&#X221A;</span></td><td class="dcell"><table style="border:0;border-spacing:1;border-collapse:separate;" class="cellpadding0"><tr><td class="hrule"></td></tr>
+<tr><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">N</span><sub><span style="font-style:italic">x</span></sub></td></tr>
+</table></td></tr>
+</table></td></tr>
+</table></td><td class="dcell">*</td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center"><span style="font-style:italic">FOV</span><sub><span style="font-style:italic">y</span></sub></td></tr>
+<tr><td class="hrule"></td></tr>
+<tr><td class="dcell" style="text-align:center"><table class="display"><tr style="vertical-align:middle"><td class="dcell"><span style="font-size:x-large">&#X221A;</span></td><td class="dcell"><table style="border:0;border-spacing:1;border-collapse:separate;" class="cellpadding0"><tr><td class="hrule"></td></tr>
+<tr><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">N</span><sub><span style="font-style:italic">y</span></sub></td></tr>
+</table></td></tr>
+</table></td></tr>
+</table></td><td class="dcell">*<span style="font-style:italic">Thick</span>*</td><td class="dcell"><span style="font-size:x-large">&#X221A;</span></td><td class="dcell"><table style="border:0;border-spacing:1;border-collapse:separate;" class="cellpadding0"><tr><td class="hrule"></td></tr>
+<tr><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">NSA</span></td></tr>
+</table></td><td class="dcell">*</td><td class="dcell"><span style="font-size:x-large">&#X221A;</span></td><td class="dcell"><table style="border:0;border-spacing:1;border-collapse:separate;" class="cellpadding0"><tr><td class="hrule"></td></tr>
+<tr><td style="text-align:center;white-space:nowrap" >&#X394;&#X2004;<span style="font-style:italic">t</span></td></tr>
+</table></td><td class="dcell">
+<span class="equationnumber">(1)</span></td></tr>
+</table></div><!--CUT END -->
 <!--HTMLFOOT-->
 <!--ENDHTML-->
 <!--FOOTER-->

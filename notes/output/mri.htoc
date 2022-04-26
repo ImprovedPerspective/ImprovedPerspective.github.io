@@ -1,3 +1,23 @@
 \begin{tocenv}
-\tocitem \@locref{sec1}{\begin{@norefs}\@print{1}\quad{}Basics{}\end{@norefs}}
+\tocitem \@locref{sec1}{\begin{@norefs}\@print{1}\quad{}Lab 1{}\end{@norefs}}
+\tocitem \@locref{sec2}{\begin{@norefs}\@print{2}\quad{}Lab 2{}\end{@norefs}}
+\begin{tocenv}
+\tocitem \@locref{sec3}{\begin{@norefs}\@print{2.1}\quad{}Larmour Frequency Equation{}\end{@norefs}}
+\tocitem \@locref{sec4}{\begin{@norefs}\@print{2.2}\quad{}Frequency Encode Gradient Equation{}\end{@norefs}}
+\tocitem \@locref{sec5}{\begin{@norefs}\@print{2.3}\quad{}Slice Selection {}\end{@norefs}}
+\tocitem \@locref{sec6}{\begin{@norefs}\@print{2.4}\quad{}Sinc Pulse Notes{}\end{@norefs}}
+\tocitem \@locref{sec7}{\begin{@norefs}\@print{2.5}\quad{}Slice Rephase{}\end{@norefs}}
+\tocitem \@locref{sec8}{\begin{@norefs}\@print{2.6}\quad{}Frequency Encoding{}\end{@norefs}}
+\tocitem \@locref{sec9}{\begin{@norefs}\@print{2.7}\quad{}Gradient Waveforms and Eddy Currents{}\end{@norefs}}
+\end{tocenv}
+\tocitem \@locref{sec10}{\begin{@norefs}\@print{3}\quad{}Lab 3{}\end{@norefs}}
+\begin{tocenv}
+\tocitem \@locref{sec11}{\begin{@norefs}\@print{3.1}\quad{}T1{}\end{@norefs}}
+\tocitem \@locref{sec12}{\begin{@norefs}\@print{3.2}\quad{}T2{}\end{@norefs}}
+\end{tocenv}
+\tocitem \@locref{sec13}{\begin{@norefs}\@print{4}\quad{}Lab 4{}\end{@norefs}}
+\begin{tocenv}
+\tocitem \@locref{sec14}{\begin{@norefs}\@print{4.1}\quad{}SNR Metrics{}\end{@norefs}}
+\tocitem \@locref{sec15}{\begin{@norefs}\@print{4.2}\quad{}SNR Equation{}\end{@norefs}}
+\end{tocenv}
 \end{tocenv}

@@ -1,1 +1,15 @@
-\@@addtocsec{htoc}{sec1}{0}{\@print{1}\quad{}Basics{}}
+\@@addtocsec{htoc}{sec1}{0}{\@print{1}\quad{}Lab 1{}}
+\@@addtocsec{htoc}{sec2}{0}{\@print{2}\quad{}Lab 2{}}
+\@@addtocsec{htoc}{sec3}{1}{\@print{2.1}\quad{}Larmour Frequency Equation{}}
+\@@addtocsec{htoc}{sec4}{1}{\@print{2.2}\quad{}Frequency Encode Gradient Equation{}}
+\@@addtocsec{htoc}{sec5}{1}{\@print{2.3}\quad{}Slice Selection {}}
+\@@addtocsec{htoc}{sec6}{1}{\@print{2.4}\quad{}Sinc Pulse Notes{}}
+\@@addtocsec{htoc}{sec7}{1}{\@print{2.5}\quad{}Slice Rephase{}}
+\@@addtocsec{htoc}{sec8}{1}{\@print{2.6}\quad{}Frequency Encoding{}}
+\@@addtocsec{htoc}{sec9}{1}{\@print{2.7}\quad{}Gradient Waveforms and Eddy Currents{}}
+\@@addtocsec{htoc}{sec10}{0}{\@print{3}\quad{}Lab 3{}}
+\@@addtocsec{htoc}{sec11}{1}{\@print{3.1}\quad{}T1{}}
+\@@addtocsec{htoc}{sec12}{1}{\@print{3.2}\quad{}T2{}}
+\@@addtocsec{htoc}{sec13}{0}{\@print{4}\quad{}Lab 4{}}
+\@@addtocsec{htoc}{sec14}{1}{\@print{4.1}\quad{}SNR Metrics{}}
+\@@addtocsec{htoc}{sec15}{1}{\@print{4.2}\quad{}SNR Equation{}}

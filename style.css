@@ -3,6 +3,17 @@
 	box-sizing: border-box;
 }
 */
+
+table
+{
+	color:1px solid #ccc;
+}
+
+array
+{
+	color:1px solid #ccc;
+}
+
 body
 {
 	margin: 0;

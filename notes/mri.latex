@@ -3,10 +3,144 @@
 
 \begin{document}
 
-\section{Basics}
-Here I am going to put some of the most basic important equations.
-$ \omega = \gamma B$
+\section{Lab 1}
+Console generates RF that generate the MR signal.
+Magnetic field gradient's control the spatial localization.
+Pulse Sequence is a program that controls the gradients and coils to activate them at certain times.
 
+Pulse sequence  is set of controls for  generating pulses and the digitizer. 
+Free induction decay (FID) is the signal returned when no spatial localization occurs.
+	
+A RF pulse tip spins to generate a signal. The Slice Select, Readout (aka Frequency Encode) and the Phase Encode gradients are used to for spatial localization. Repetition Time is TR and Echo Time is TE.
+
+MRI's require homogeneous fields. This means that the strength of the field is relatively even throughout the area being investigated. 
+Homogeneity is often measure in terms of parts per million or ppm. 
+If the Larmour Frequency were 10 MHz then 1 ppm would be 10 Hz.
+Shimming is the process of improving the homogeneity by using shim coils to change the magnetic field distribution.
+
+The MRI takes data in as a set of Kspace data. A Fourier Transform of the k-space data can be taken to reconstruct the image.
+
+PreLab 1
+TODO: Bandwidth of RF pulse
+TODO: Spectral Width 
+TODO: Full-width Half maximum
+TODO: FOV Matrix size to resolution
+TODO: Imaging planes (Axial Sagital ...)
+
+\section{Lab 2}
+The Slice Selection Pulse tips the spins in the region we are interested in investigating.
+The 180 or refocusing pulse is used in spin echos to flip the tips 180 degrees. 
+The signal is acquired as the frequency encoding gradient is producing spatial localization in that direction.
+
+
+\subsection{Larmour Frequency Equation}
+
+$ \omega = \gamma * B_0$
+
+$\gamma = 2*pi*42.57*10^6 [rad*Hz/T] $
+
+$ T = 10^4 G$
+
+The Larmour Frequency is the resonant frequency of spins present in a magnetic field of a certain strength.
+
+\subsection{Frequency Encode Gradient Equation}
+$ BW_{fe} [rad/sec] = \gamma * G_{fe}*FOV_{fe}$
+
+Note: This is the frequency encode band width not pulse!
+
+$ Sampling Rate = $
+
+
+\subsection{Slice Selection }
+$ Slice Thickness = \Delta z$
+
+$ \Delta z = \frac{BW_{pulse} [rad/sec]}{\gamma G_{ss}}$
+
+$ 1 [G/cm] = 425.7 [Hz/mm]$
+
+Because a narrower bandwidth means a longer RF pulse which would change timings, the slice thickness is typically changed by the gradient strength. To generate a relatively uniform tip over all bandwidths, we use a sinc pulse as its Fourier Transform is a rectangular pulse.
+
+\subsection{Sinc Pulse Notes}
+Period of a sinc pulse is the time from its peak to first null. 
+The bandwidth in Hz is the inverse of this time.
+
+\subsection{Slice Rephase}
+If the tips of the spins are knocked down at the middle of the sinc pulse then the spins at different distances precess at different frequencies. This results in a phase offset based on position. Therefore a spin at distance z  for a sinc pulse of length Tp will have an offset of $\phi(z) = \gamma * G_{ss}*z*\frac{T_p}{2} $. 
+If the spins are knocked down at the center point of the sinc then they only dephase for half of the pulse length $\frac{T_P}{2}$. 
+
+To address this dephasing, we apply a gradient withe the opposite sign for $\frac{T_P}{2}$ which will result in a total net phase of 0.
+Notes: To account for gradients the general equation is ${\int ^{t=\frac{T_{P}}{2}+ramp}}_{t=0}G_{ss}(t)dt = - \int_{t=rewind\_pulse}G_{rw}(t)dt $
+
+\subsection{Frequency Encoding}
+The gradient in this direction maps a frequency value to a position. When we get a signal back from the echo, we can determine its position based on its frequency. 
+
+The frequency encode gradient also causes the phase accumulation which means we must dephase cancel out this effect. We need the frequency dephase pulse to have the same area as the first half of the frequency encoding pulse so that the total net dephase is 0. 
+Important Note: The 180 degree pulse flips the sign of our phase. If the frequency encode dephase is after the 180 it will be the opposite sign of the frequency encoding  pulse if its before it will be the same sign. 
+This goes for all dephasing pulses.
+
+\subsection{Gradient Waveforms and Eddy Currents}
+Producing the desired gradient pulse is not as simple as sending an exact digital copy of the signal we want to the gradient amplifiers. Instead, we have to deal with the realities that the gradients have rise times resulting from being inductors and other non ideal characteristics that we must address. 
+To get our desired output, we send a predistorted waveform. The predistortion is called pre-emphasis. It compensates for the transfer function of the entire system.
+
+The ideal waveforms can be seen on the console. The predistorted waveforms can be seen going into the amplifier and out from the amplifier we can see the actual produced currents. The actual magnetic field gradients are not exactly any of these measurements due to eddy currents.
+
+\section{Lab 3}
+Discusses T1, T2, TR, and TE parameters.
+T1 and T2 are relaxation parameters that effect the contrast between different tissues. 
+The Image intensity equation $I(x,y) = M_z^0 (x,y)(1-e^{\frac{-TR}{T_1(x,y)}})*e^{\frac{-TE}{T2(x,y)}}$
+
+A T1 weighting occurs when we reduce the impact of T2 relaxation. A super short TE and TR on the order of T1 would obtain an image whose contrast is mainly determined by the T1. For a T2 weighted image we would have a TE on the order of T2 with a long TR.
+
+By collecting three images, two with the same TR but different TE and two with the same TE but different TR values. We can then use the intensity equation to find the values for T2 and T1 by the two data sets.
+
+You can analytically solve for T2 from the ratio of the Intensity equation of two images to find $T_2  =\frac{TE_2-TE_1}{ln(\frac{I_1}{I_2})}$
+T1 requires you to find a best fit curve.
+
+\subsection{T1}
+T1 is the relaxation of the tip angle back to 0 degrees from whatever angle it was tipped to.
+
+\subsection{T2}
+T2 is the loss of signal due to dephasing of spins in the transverse plane.
+
+\section{Lab 4}
+Signal to Noise Ratio = SNR
+
+Issues with averaging just a block of air as noise:
+\begin{itemize}
+	\item[--] FOV is completely filled
+\item[--] Phase encode jitter spreads the noise out
+\item[--] Using an array coil
+\end{itemize}
+
+We prefer to use standard deviation to measure the noise. 
+Ideal snr measurement would take repeated scans over the course of a year.
+
+\subsection{SNR Metrics}
+
+$ SNR_{simple} = \frac{m(signal)}{m(noise)}$
+
+$ SNR_{mean} = \frac{m(signal)}{\sqrt{\frac{2}{\pi}}m(noise)=1.26*SNR_{simple}}$
+
+$ SNR_{std} = \frac{m(signal)}{\sqrt{\frac{2}{4-\pi}}std(noise)}= 0.655\frac{m(signal)}{std(noise)}$
+
+For the SNR difference method, obtain two identical images then take the mean of the sum of the mean of the difference.
+
+$ SNR_{diff} = \frac{\frac{1}{2}m(sum)}{\frac{1}{\sqrt{2}}m(diff)}= \frac{m(sum)}{\sqrt{2}m(diff)}$
+
+For the SNR zero method, obtain two images but one with the tip angle set to 0 so any transmitter noise is still present.
+
+Then you can use either $SNR_{mean}$ or $SNR_{std}$ with the noise coming from the second image.
+
+
+\subsection{SNR Equation}
+
+$ SNR = K* (Voxel\_Size) * \frac{\sqrt{Measurements}}{\sqrt{Bandwidth}} $
+
+For 2D,
+
+\begin{equation}
+ SNR_{2D} = K*\frac{FOV_x}{\sqrt{N_x}}*\frac{FOV_y}{\sqrt{N_y}}*Thick*\sqrt{NSA}*\sqrt{\Delta t}
+\end{equation}
 
 \end{document}
 
