@@ -13,3 +13,13 @@
 \@@addtocsec{htoc}{sec13}{0}{\@print{4}\quad{}Lab 4{}}
 \@@addtocsec{htoc}{sec14}{1}{\@print{4.1}\quad{}SNR Metrics{}}
 \@@addtocsec{htoc}{sec15}{1}{\@print{4.2}\quad{}SNR Equation{}}
+\@@addtocsec{htoc}{sec16}{0}{\@print{5}\quad{}Lab 5{}}
+\@@addtocsec{htoc}{sec17}{1}{\@print{5.1}\quad{}Adjusting One Shim{}}
+\@@addtocsec{htoc}{sec18}{1}{\@print{5.2}\quad{}Field and Phase Maps{}}
+\@@addtocsec{htoc}{sec19}{0}{\@print{6}\quad{}Lab 6{}}
+\@@addtocsec{htoc}{sec20}{1}{\@print{6.1}\quad{}Two-Point Dixon Method{}}
+\@@addtocsec{htoc}{sec21}{1}{\@print{6.2}\quad{}Three-Point Dixon Method{}}
+\@@addtocsec{htoc}{sec22}{1}{\@print{6.3}\quad{}Chemical Shift Notes{}}
+\@@addtocsec{htoc}{sec23}{0}{\@print{7}\quad{}Lab 7{}}
+\@@addtocsec{htoc}{sec24}{1}{\@print{7.1}\quad{}Time of Flight{}}
+\@@addtocsec{htoc}{sec25}{1}{\@print{7.2}\quad{}Phase Velocity Measurement{}}

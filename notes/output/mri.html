@@ -164,7 +164,70 @@ Ideal snr measurement would take repeated scans over the course of a year.</p>
 <tr><td style="text-align:center;white-space:nowrap" >&#X394;&#X2004;<span style="font-style:italic">t</span></td></tr>
 </table></td><td class="dcell">
 <span class="equationnumber">(1)</span></td></tr>
-</table></div><!--CUT END -->
+</table></div><p>Variable Meanings:</p><p> <span style="font-style:italic">NSA</span> =  Number of Signal Averages = Number of Excitations</p><p> <span style="font-style:italic">FOV</span> =  The Field of View in a distance unit</p><p> <span style="font-style:italic">N</span><sub><span style="font-style:italic">a</span></sub> =  Number of acquired points in the a direction </p><p> &#X394; <span style="font-style:italic">t</span> = 1/<span style="font-style:italic">Bandwidth</span> = <span style="font-style:italic">N</span><sub><span style="font-style:italic">fe</span></sub>/(<span style="font-style:italic">time</span> <span style="font-style:italic">sample</span> <span style="font-style:italic">all</span> <span style="font-style:italic">N</span><sub><span style="font-style:italic">fe</span></sub> <span style="font-style:italic">points</span>)  The  &#X394; <span style="font-style:italic">t</span> is the time it takes to sample one point. </p><p> <span style="font-style:italic">Thick</span> =  The thickness is the size of the slice thickness.</p>
+<!--TOC section id="sec16" Lab 5-->
+<h2 id="sec16" class="section">5&#X2003;Lab 5</h2><!--SEC END --><p>
+Shimming and Linewidths
+MRI&#X2019;s require uniformity on the scale of ppm.
+Generally to 10&#X2019;s off ppm but spectroscopy and gradient echos might be even lower.</p><p>Shims are magnets that are used to adjust the main magnetic field to improve homogeneity.
+We often shim by sending a hard pulse over the whole phantom and reading the amplitude of the integral of the signal that returns. We then try and maximize this by searching through all of the different currents.</p><p>For our FID images we use a very short RF pulse to be sure that we excite all frequencies related to the image. We move off frequency so the fid is oscillatory. </p>
+<!--TOC subsection id="sec17" Adjusting One Shim-->
+<h3 id="sec17" class="subsection">5.1&#X2003;Adjusting One Shim</h3><!--SEC END --><p>
+Initially, we imaged with all the shims set to 0.
+Then to see the impact that the shim will have on the static magnetic field we image +1000 and then -1000 DAC units.</p><p>DAC units: different mri scanners have different shims and gradients. DAC (digital to analog converter) handles the input of current into the coils. The max DAC units drives with the max current. 
+We want to find the field offset per dac unit.</p>
+<!--TOC subsection id="sec18" Field and Phase Maps-->
+<h3 id="sec18" class="subsection">5.2&#X2003;Field and Phase Maps</h3><!--SEC END --><p>
+We can take the phase of our image and make a map of total phase difference from a point by unwrapping at phase breaks. With inhomogeneities in the magnetic field, phase offsets will occur between the center field strength and other places of field offset because of their different Larmour frequency.</p><p>With unwrapped phase we can map the frequency of points:</p><div class="equationcontainer"><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">
+	&#X394;&#X2004;<span style="font-style:italic">f</span>[<span style="font-style:italic">Hz</span>]&#X2004;=&#X2004;</td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">&#X394;&#X2004;&#X3C6;[<span style="font-style:italic">degrees</span>]</td></tr>
+<tr><td class="hrule"></td></tr>
+<tr><td class="dcell" style="text-align:center"><table class="display"><tr style="vertical-align:middle"><td class="dcell"><span style="font-style:italic">TE</span>[<span style="font-style:italic">sec</span>]*360</td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">[<span style="font-style:italic">degrees</span>]</td></tr>
+<tr><td class="hrule"></td></tr>
+<tr><td class="dcell" style="text-align:center">[<span style="font-style:italic">cycle</span>]</td></tr>
+</table></td></tr>
+</table></td></tr>
+</table></td><td class="dcell">
+<span class="equationnumber">(2)</span></td></tr>
+</table></div><p>This frequency can then be used for the field:</p><div class="equationcontainer"><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">
+	&#X394;&#X2004;<span style="font-style:italic">B</span><sub>0</sub>[<span style="font-style:italic">ppm</span>]&#X2004;=&#X2004;</td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">&#X394;&#X2004;<span style="font-style:italic">f</span>[<span style="font-style:italic">Hz</span>]</td></tr>
+<tr><td class="hrule"></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">f</span><sub>0</sub>[<span style="font-style:italic">MHz</span>]</td></tr>
+</table></td><td class="dcell">
+<span class="equationnumber">(3)</span></td></tr>
+</table></div><p>Notes: Linewidth is realted to this but is an average scalar measurement while a Field Map tells us the relative field strength at each point.
+We can subtract the -1000 Dac unit image from the +1000 unit image which cancels out the background phase.</p><p>Our shim sensitivity units will be in <span style="font-style:italic">Hz</span>/<span style="font-style:italic">cm</span><sup><span style="font-style:italic">n</span></sup>/<span style="font-style:italic">Amp</span> where n is the order of the shim.</p>
+<!--TOC section id="sec19" Lab 6-->
+<h2 id="sec19" class="section">6&#X2003;Lab 6</h2><!--SEC END --><p>
+Two and Three point Dixon Method.
+The dixon method is a way of produce images containing just water or just fat in them. The method uses that there is a 3.5 ppm shift in the frequencies of fat and water to separate the two.</p><p>The time difference between which they oscillate at is the chemical shift frequency  <span style="font-style:italic">f</span><sub><span style="font-style:italic">cs</span></sub> = 3.5 <span style="font-style:italic">ppm</span>. The water and fat signals start in phase but will go out of phase when the fat signal has rotated one half cycle <span style="font-style:italic">a</span> = <span style="font-style:italic">t</span><sub><span style="font-style:italic">null</span></sub>=1/2*<span style="font-style:italic">f</span><sub><span style="font-style:italic">cs</span></sub></p><p>If the time between the spin-echo and gradient-echo equals <span style="font-style:italic">t</span><sub><span style="font-style:italic">null</span></sub> then the fat and water signals are out of phase.</p>
+<!--TOC subsection id="sec20" Two-Point Dixon Method-->
+<h3 id="sec20" class="subsection">6.1&#X2003;Two-Point Dixon Method</h3><!--SEC END --><p>
+Produce a standard pulse echo image where both the water and fat will be in phase. Then move the 180 degree pulse by <span style="font-style:italic">t</span><sub><span style="font-style:italic">null</span></sub>/2 to produce the out of phase image.
+Moving this 180 pulse by a value C causes the difference of the spin echo to be increased by C while at the same time decreasing the gradient echo by C resulting in  &#X394; <span style="font-style:italic">T</span> = <span style="font-style:italic">T</span><sub><span style="font-style:italic">s</span></sub><span style="font-style:italic">e</span>&#X2212;<span style="font-style:italic">T</span><sub><span style="font-style:italic">g</span></sub><span style="font-style:italic">e</span> = 2*<span style="font-style:italic">C</span> if before the move it equaled 0.
+The resulting equations are as follows.</p><div class="equationcontainer"><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">
+	<span style="font-style:italic">I</span><sub>1</sub>=&#X2004;<span style="font-style:italic">I</span><sub><span style="font-style:italic">w</span></sub>+<span style="font-style:italic">I</span><sub><span style="font-style:italic">f</span></sub>&#X2004;	<span style="font-style:italic">I</span><sub>2</sub>=&#X2004;<span style="font-style:italic">I</span><sub><span style="font-style:italic">w</span></sub>&#X2212;<span style="font-style:italic">I</span><sub><span style="font-style:italic">f</span></sub>&#X2004;	<span style="font-style:italic">I</span><sub><span style="font-style:italic">w</span></sub>&#X2004;=&#X2004;0.5*|<span style="font-style:italic">I</span><sub>1</sub>+<span style="font-style:italic">I</span><sub>2</sub>|&#X2004;	<span style="font-style:italic">I</span><sub><span style="font-style:italic">f</span></sub>&#X2004;=&#X2004;0.5*|<span style="font-style:italic">I</span><sub>1</sub>&#X2212;<span style="font-style:italic">I</span><sub>2</sub>|
+<span class="equationnumber">(4)</span></td></tr>
+</table></div>
+<!--TOC subsection id="sec21" Three-Point Dixon Method-->
+<h3 id="sec21" class="subsection">6.2&#X2003;Three-Point Dixon Method</h3><!--SEC END --><p>
+The three point dixon method adds a third image in addition to the 0 degrees and 180 degrees to help account for phase offset error. This third image is taken at 360 degrees. The phase due to time shift is the same between both the 0 and 360 degree images so the only difference between their phases must be error. The 360 will have accumlated 2 times the phase error of the 180. One half the result of the phase of the 360 image subtracted by the 0 degree image results in the phase error of the 180 image. By subtracting this result from the 180 image we can then use our new modified 180 and 0 degree image with the 2 point dixon method.</p>
+<!--TOC subsection id="sec22" Chemical Shift Notes-->
+<h3 id="sec22" class="subsection">6.3&#X2003;Chemical Shift Notes</h3><!--SEC END --><p>
+The frequency difference between water and fat can result in a black gap appearing between the water and fat in the frequency encode direction .</p><div class="equationcontainer"><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">
+	<span style="font-style:italic">Chem</span>&#X2004;<span style="font-style:italic">Shift</span>&#X2004;<span style="font-style:italic">Pixel</span>&#X2004;#&#X2004;=&#X2004;</td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">&#X394;&#X2004;<span style="font-style:italic">f</span>&#X2004;</td></tr>
+<tr><td class="hrule"></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">BW</span>/<span style="font-style:italic">N</span><sub><span style="font-style:italic">x</span></sub></td></tr>
+</table></td><td class="dcell">
+<span class="equationnumber">(5)</span></td></tr>
+</table></div>
+<!--TOC section id="sec23" Lab 7-->
+<h2 id="sec23" class="section">7&#X2003;Lab 7</h2><!--SEC END -->
+<!--TOC subsection id="sec24" Time of Flight-->
+<h3 id="sec24" class="subsection">7.1&#X2003;Time of Flight</h3><!--SEC END -->
+<!--TOC subsection id="sec25" Phase Velocity Measurement-->
+<h3 id="sec25" class="subsection">7.2&#X2003;Phase Velocity Measurement</h3><!--SEC END --><p>
+A particle moving in a gradient will accumulate phase. By measuring the </p><p>Im not going to be able to finish the write ups till after my exam. Best of luck!
+</p><!--CUT END -->
 <!--HTMLFOOT-->
 <!--ENDHTML-->
 <!--FOOTER-->

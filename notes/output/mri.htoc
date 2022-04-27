@@ -20,4 +20,20 @@
 \tocitem \@locref{sec14}{\begin{@norefs}\@print{4.1}\quad{}SNR Metrics{}\end{@norefs}}
 \tocitem \@locref{sec15}{\begin{@norefs}\@print{4.2}\quad{}SNR Equation{}\end{@norefs}}
 \end{tocenv}
+\tocitem \@locref{sec16}{\begin{@norefs}\@print{5}\quad{}Lab 5{}\end{@norefs}}
+\begin{tocenv}
+\tocitem \@locref{sec17}{\begin{@norefs}\@print{5.1}\quad{}Adjusting One Shim{}\end{@norefs}}
+\tocitem \@locref{sec18}{\begin{@norefs}\@print{5.2}\quad{}Field and Phase Maps{}\end{@norefs}}
+\end{tocenv}
+\tocitem \@locref{sec19}{\begin{@norefs}\@print{6}\quad{}Lab 6{}\end{@norefs}}
+\begin{tocenv}
+\tocitem \@locref{sec20}{\begin{@norefs}\@print{6.1}\quad{}Two-Point Dixon Method{}\end{@norefs}}
+\tocitem \@locref{sec21}{\begin{@norefs}\@print{6.2}\quad{}Three-Point Dixon Method{}\end{@norefs}}
+\tocitem \@locref{sec22}{\begin{@norefs}\@print{6.3}\quad{}Chemical Shift Notes{}\end{@norefs}}
+\end{tocenv}
+\tocitem \@locref{sec23}{\begin{@norefs}\@print{7}\quad{}Lab 7{}\end{@norefs}}
+\begin{tocenv}
+\tocitem \@locref{sec24}{\begin{@norefs}\@print{7.1}\quad{}Time of Flight{}\end{@norefs}}
+\tocitem \@locref{sec25}{\begin{@norefs}\@print{7.2}\quad{}Phase Velocity Measurement{}\end{@norefs}}
+\end{tocenv}
 \end{tocenv}

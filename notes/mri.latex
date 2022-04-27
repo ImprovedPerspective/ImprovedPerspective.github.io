@@ -142,5 +142,93 @@ For 2D,
  SNR_{2D} = K*\frac{FOV_x}{\sqrt{N_x}}*\frac{FOV_y}{\sqrt{N_y}}*Thick*\sqrt{NSA}*\sqrt{\Delta t}
 \end{equation}
 
+Variable Meanings:
+
+$ NSA = $ Number of Signal Averages = Number of Excitations
+
+$ FOV = $ The Field of View in a distance unit
+
+$ N_a = $  Number of acquired points in the a direction 
+
+$ \Delta t = \frac{1}{Bandwidth} = N_{fe}/(time sample all N_{fe} points) $  The $ \Delta t$ is the time it takes to sample one point. 
+
+$ Thick = $ The thickness is the size of the slice thickness.
+
+\section{Lab 5}
+Shimming and Linewidths
+MRI's require uniformity on the scale of ppm.
+Generally to 10's off ppm but spectroscopy and gradient echos might be even lower.
+
+Shims are magnets that are used to adjust the main magnetic field to improve homogeneity.
+We often shim by sending a hard pulse over the whole phantom and reading the amplitude of the integral of the signal that returns. We then try and maximize this by searching through all of the different currents.
+
+For our FID images we use a very short RF pulse to be sure that we excite all frequencies related to the image. We move off frequency so the fid is oscillatory. 
+
+
+\subsection{Adjusting One Shim}
+Initially, we imaged with all the shims set to 0.
+Then to see the impact that the shim will have on the static magnetic field we image +1000 and then -1000 DAC units.
+
+DAC units: different mri scanners have different shims and gradients. DAC (digital to analog converter) handles the input of current into the coils. The max DAC units drives with the max current. 
+We want to find the field offset per dac unit.
+
+\subsection{Field and Phase Maps}
+We can take the phase of our image and make a map of total phase difference from a point by unwrapping at phase breaks. With inhomogeneities in the magnetic field, phase offsets will occur between the center field strength and other places of field offset because of their different Larmour frequency.
+
+With unwrapped phase we can map the frequency of points:
+
+\begin{equation}
+	\Delta f[Hz] = \frac{\Delta \phi[degrees]}{TE[sec]*360\frac{[degrees]}{[cycle]}}
+\end{equation}
+
+This frequency can then be used for the field:
+
+\begin{equation}
+	\Delta B_0[ppm] = \frac{\Delta f[Hz]}{f_0[MHz]}
+\end{equation}
+
+Notes: Linewidth is realted to this but is an average scalar measurement while a Field Map tells us the relative field strength at each point.
+We can subtract the -1000 Dac unit image from the +1000 unit image which cancels out the background phase.
+
+Our shim sensitivity units will  be in $Hz/cm^n/Amp$ where n is the order of the shim.
+
+\section{Lab 6}
+Two and Three point Dixon Method.
+The dixon method is a way of produce images containing just water or just fat in them. The method uses that there is a 3.5 ppm shift in the frequencies of fat and water to separate the two.
+
+The time difference between which they oscillate at is the chemical shift frequency $ f_{cs} = 3.5 ppm$. The water and fat signals start in phase but will go out of phase when the fat signal has rotated one half cycle $a = t_{null}=\frac{1}{2*f_{cs}}$
+
+If the time between the spin-echo and gradient-echo equals $t_{null}$ then the fat and water signals are out of phase.
+
+\subsection{Two-Point Dixon Method}
+Produce a standard pulse echo image where both the water and fat will be in phase. Then move the 180 degree pulse by $t_{null}/2$ to produce the out of phase image.
+Moving this 180 pulse by a value C causes the difference of the spin echo to be increased by C while at the same time decreasing the gradient echo by C resulting in $ \Delta T = T_se-T_ge = 2*C$ if before the move it equaled 0.
+The resulting equations are as follows.
+
+\begin{equation}
+	I_1= I_w+I_f \\
+	I_2= I_w-I_f \\
+	I_w = 0.5*|{I_1+I_2}| \\
+	I_f = 0.5*|{I_1-I_2}|
+\end{equation}
+
+\subsection{Three-Point Dixon Method}
+The three point dixon method adds a third image in addition to the 0 degrees and 180 degrees to help account for phase offset error. This third image is taken at 360 degrees. The phase due to time shift is the same between both the 0 and 360 degree images so the only difference between their phases must be error. The 360 will have accumlated 2 times the phase error of the 180. One half the result of  the phase of the 360 image subtracted by the 0 degree image results in the phase error of the 180 image. By subtracting this result from the 180 image we can then use our new modified 180 and 0 degree image with the 2 point dixon method.
+
+\subsection{Chemical Shift Notes}
+The frequency difference between water and fat can result in a black gap appearing between the water and fat in the frequency encode direction .
+
+\begin{equation}
+	Chem Shift Pixel # = \frac{\Delta f }{BW/N_x}
+\end{equation}
+
+\section{Lab 7}
+\subsection{Time of Flight}
+
+\subsection{Phase Velocity Measurement}
+A particle moving in a gradient will accumulate phase. By measuring the 
+
+
+Im not going to be able to finish the write ups till after my exam. Best of luck!
 \end{document}
 
